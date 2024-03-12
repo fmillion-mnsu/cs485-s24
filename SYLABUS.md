@@ -2,13 +2,18 @@
 
 Minnesota State University, Mankato. College of Science, Engineering, & Technology.
 
-*Spring 2024, Block 1. Section 1.*
+*Spring 2024, Block 2. Section 1.*
 
 This course is offered on an In-Person Only basis. In-person attendance is required for each course session.
 
 This is a 2-credit elective course for Computer Science majors.
 
-> This is version **1.0** of the syllabus. Any changes will be announced in class and posted in this repository as well as on D2L.
+> This is version **1.01** of the syllabus. Any changes will be announced in class and posted in this repository as well as on D2L.
+
+> **Changes:**
+>
+> * v1.01: 
+>   * Fix block number.
 
 ## Class Time and Place
 
