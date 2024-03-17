@@ -386,7 +386,9 @@ Finally we arrive at our final command line. For example:
 
 Run this command and then access <http://localhost:8000> in your browser. If everything worked, you should not only see the same type of index you saw in part 3, but you should *also* now be able to interact with it in several ways. Experiment and play around with the app!
 
-For Part 4b, you just need your completed Dockerfile. Copy it off to your submission.
+As part of your submission, please add *three* "projects" to the website and scroll to the bottom to show your projects, and take a **screenshot** of this. 
+
+For Part 4b, you need your completed Dockerfile. Copy it off to your submission. You also need the screenshot just mentioned above.
 
 ### Part 4c: Persisting Data and Compose Files
 
@@ -450,6 +452,7 @@ Whew! We accomplished a *lot* in this activity! Here is the final list of what y
 * The Dockerfile you made in part 2 - name it `Dockerfile.a1-p2`.
 * The Dockerfile you made in part 3 - name it `Dockerfile.a1-p3`.
 * The Dockerfile you made in part 4b - name it `Dockerfile.a1-p4b`.
+* One screenshot showing three new CS "projects" added to the list in the web application. (This proves you got the app working properly!)
 * The `compose.yml` file you made in part 4c, after changing the port number for the API as necessary. You can leave the file named `compose.yml`.
 * A zip file (preferably called `user.zip`) which is a copy of the contents of the `user/` folder within the project after running the example `compose` file but *after* changing the port number. 
 

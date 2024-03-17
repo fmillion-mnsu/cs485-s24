@@ -1,6 +1,6 @@
 # CS 485 – Topics in Platform-Based Development
 
-**Contents:
+**Contents**:
 
 * **[Syllabus](SYLABUS.md)**
 * Assignments:
