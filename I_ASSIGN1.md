@@ -16,7 +16,7 @@ This activity will give you the chance to create your own Dev Container.
 
 4. Make appropriate selections for developing a NodeJS application. Select to store the container files in the *workspace* so that you are able to see the `.devcontainer/devcontainer.json` file in your source tree.
 
-    Don't worry about adding any features - unless you want to add `cowsay` for a little fun. 
+    Add the feature "Node via NPM, Yarn..." to your dev container. You can choose the defaults for its options.
 
 5. Now, use the command palette to run the "Reopen in Container" option. 
    
@@ -26,21 +26,21 @@ This activity will give you the chance to create your own Dev Container.
 
     > **Hint:** You can't just open a standard terminal and expect things to work now. Tooling has been installed into the *container*, but not into WSL itself or into your host system. 
 
-6. Use the command `yarn create react-app <your-name-lowercased>` to create a React application. You won't need to actually do any React coding, but this will give you an application you can run for experimentation purposes.
+7. Use the command `yarn create react-app <your-name-lowercased>` to create a React application. You won't need to actually do any React coding, but this will give you an application you can run for experimentation purposes.
 
-7. `cd` into the directory with your name, and try running the React application:
+8. `cd` into the directory with your name, and try running the React application:
 
         yarn start
 
     > **Hint:** You  can also choose to use `npm` if you prefer. It's OK either way.
 
-8. Assuming all went well, you should now be able to access the application by opening a browser on your *host* system and accessing `http://localhost:3000` - in fact, in certain cases it might even have opened the browser for you!
+9. Assuming all went well, you should now be able to access the application by opening a browser on your *host* system and accessing `http://localhost:3000` - in fact, in certain cases it might even have opened the browser for you!
 
     But we're not quite done. We're going to make a few optimizations to the dev container now.
 
-9. Let's create a post-start script that runs an `yarn install` to ensure that the container automatically makes sure the application dev environment is ready. At the *root* of the project (not inside the folder with the React application), create a file named `poststart.sh`. You can create the file with VS Code.
+10. Let's create a post-start script that runs an `yarn install` to ensure that the container automatically makes sure the application dev environment is ready. At the *root* of the project (not inside the folder with the React application), create a file named `poststart.sh`. You can create the file with VS Code.
 
-10. In the file, add the following script:
+11. In the file, add the following script:
 
         #!/bin/bash
         
@@ -48,13 +48,13 @@ This activity will give you the chance to create your own Dev Container.
         
         yarn install
 
-11. After saving the file, from your **command prompt**, run this command:
+12. After saving the file, from your **command prompt**, run this command:
 
         chmod +x poststart.sh
 
     You've seen this before now - it makes sure that the command itself can be executed by the container!
 
-12. We now need to *edit* the file `.devcontainer/devcontainer.json`. This file is in the JSON format, which is similar to (but *not exactly like*) Python dictionaries and lists in syntax. One notable difference is that strings are *always* surrounded by double quotes, whereas Python allows single quotes if you prefer. (Some JSON parsers will allow single-quotes, but it is not standard.)
+13. We now need to *edit* the file `.devcontainer/devcontainer.json`. This file is in the JSON format, which is similar to (but *not exactly like*) Python dictionaries and lists in syntax. One notable difference is that strings are *always* surrounded by double quotes, whereas Python allows single quotes if you prefer. (Some JSON parsers will allow single-quotes, but it is not standard.)
 
     Take a look in the `devcontainer.json` file. You should see a commented-out line starting with `"postCreate Command"`. First, *uncomment* this line, then *change* `postCreateCommand` to `postStartCommand`.
 
@@ -62,11 +62,11 @@ This activity will give you the chance to create your own Dev Container.
 
     Change the value of this key to be `./poststart.sh`.
 
-13. Before proceeding, let's make sure this actually works. Fully delete the `node_modules` folder inside of your React project folder (the one with your name).
+14. Before proceeding, let's make sure this actually works. Fully delete the `node_modules` folder inside of your React project folder (the one with your name).
 
-14. Now we will *rebuild* the container - using the command palette, issue the Rebuild container command. 
+15. Now we will *rebuild* the container - using the command palette, issue the Rebuild container command. 
 
-15. Once the container comes back up, try bringing up a terminal, `cd`'ing into your React project and starting it. See if you can still access the project.
+16. Once the container comes back up, try bringing up a terminal, `cd`'ing into your React project and starting it. See if you can still access the project.
 
     If so, great work!
 
