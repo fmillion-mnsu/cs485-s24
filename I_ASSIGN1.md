@@ -58,6 +58,12 @@ This activity will give you the chance to create your own Dev Container.
 
     Take a look in the `devcontainer.json` file. You should see a commented-out line starting with `"postCreate Command"`. First, *uncomment* this line, then *change* `postCreateCommand` to `postStartCommand`.
 
+    If you do not see the commented sections of code, add this line to your file at the same level as the other options like `features` and `image`, adding the appropriate command:
+
+        ,"postStartCommand": "" // you fill this in
+
+    (You can also put the comma on the previous line, but this makes it easier to ensure the comma is in the right place.)
+
     > **Hint:** A post *create* command runs only one time - when the container is built. A post *start* command runs *every time* you start the container - i.e. every time you restart VS Code.
 
     Change the value of this key to be `./poststart.sh`.
