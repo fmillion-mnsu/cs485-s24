@@ -112,11 +112,22 @@ A few other examples of applications that can run without a separate database co
 
 Your submission for this project must contain the following:
 
-* Your Docker Compose file.
+* Your Docker Compose file. (See below for specific requirements0)
 * Any configuration files (e.g. `traefik.yaml` or others) that you use to configure your reverse proxy.
 * One screen shot each showing your two services and the dashboard being accessible from a browser at the correct domain names.
 
 This is a *group activity* and thus only *one* submission per group is required.
+
+### Compose file specifics
+
+Your Compose file must do all of the following:
+
+* Map the configuration for the reverse proxy into the container for the proxy, and any other necessary steps to use the config within the container
+* If applicable, logs should be collected and stored in a directory outside the container. (For the Traefik example, logs are stored in `/data/logs`)
+* A minimum of two other services in the Compose file that are accessed via the reverse proxy
+* Other services should store their data outside the container, but should *not* expose ports directly - the only container in the stack that should expose ports is the reverse proxy.
+  * If you use and want to expose a database container for debugging that is OK, but other containers in the stack should access the database *only* via the database container's hostname
+* If you use a database container, it should also store its data outside the container via a volume mount.
 
 I am giving you less specifics for this project so that you're encouraged to explore, experiment, research and design your own stack of containers! I'll answer questions that you have about specific problems or concepts you are struggling to understand, but please try to solve issues on your own first! (Also, feel free to ask your group members to help, and you can even ask other groups for *advice* as long as you're not getting copies of other groups' code!)
 
