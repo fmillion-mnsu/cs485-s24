@@ -1,0 +1,28 @@
+entryPoints:
+  web:
+    address: ':80'
+
+serversTransport:
+  insecureSkipVerify: true
+
+log:
+  filePath: "/logs/traefik.log"
+  level: DEBUG
+
+accessLog:
+  filePath: "/logs/access.log"
+
+providers:
+  docker:
+    watch: true
+    exposedByDefault: false
+    defaultRule: "Host(`{{ or (index .Labels \"host\") .Name }}.localtest.me`)"
+
+api:
+  dashboard: true
+
+http:
+  routers:
+    api:
+      rule: Host(`traefik.localtest.me`)
+      service: api@internal

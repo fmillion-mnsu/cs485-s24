@@ -1,0 +1,15 @@
+services:
+  traefik:
+    image: traefik
+    command: --configFile=<wherever you mounted the config file>
+    volumes:
+      - ./traefik.yaml:/some!place@in*the?container
+    ports:
+      - 80:80
+  
+  some_other_service:
+    image: some_other_image
+    labels:
+      - "traefik.enable=true"
+      - "host=example"
+  
