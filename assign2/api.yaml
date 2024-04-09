@@ -1,0 +1,5 @@
+http:
+  routers:
+    api:
+      rule: Host(`traefik.localtest.me`)
+      service: api@internal
