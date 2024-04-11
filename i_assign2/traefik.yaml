@@ -1,0 +1,29 @@
+entryPoints:
+  web:
+    address: ':80'
+
+serversTransport:
+  insecureSkipVerify: true
+
+log:
+  filePath: "/data/logs/traefik.log"
+  level: DEBUG
+
+accessLog:
+  filePath: "/data/logs/access.log"
+
+providers:
+  docker:
+    watch: true
+    exposedByDefault: false
+  file:
+    filename: "/data/traefik.yaml"
+
+api:
+  dashboard: true
+
+http:
+  routers:
+    api:
+      rule: Host(`traefik.localtest.me`)
+      service: api@internal
