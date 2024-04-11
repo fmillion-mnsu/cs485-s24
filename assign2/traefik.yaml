@@ -17,12 +17,8 @@ providers:
     watch: true
     exposedByDefault: false
     defaultRule: "Host(`{{ or (index .Labels \"host\") .Name }}.localtest.me`)"
+  file:
+    filename: "/data/api.yaml"
 
 api:
   dashboard: true
-
-http:
-  routers:
-    api:
-      rule: Host(`traefik.localtest.me`)
-      service: api@internal
