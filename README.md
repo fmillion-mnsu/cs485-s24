@@ -9,3 +9,5 @@
 * Individual Assignments:
   * **[Individual Activity 1](I_ASSIGN1.md)**
   * **[Individual Activity 1](I_ASSIGN2.md)**
+* Resources and Notes
+  * [Kubernetes Introduction](KUBERNETES.md)
