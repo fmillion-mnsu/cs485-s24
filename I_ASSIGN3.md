@@ -26,7 +26,7 @@ Before you begin, read through the [Kubernetes shallow-dive](KUBERNETES.md) to u
 
 1. Upload the container image you built into your Kubernetes cluster:
 
-        minikube image load <whatever-you-named-your-container-image>
+        minikube image load --daemon=true <whatever-you-named-your-container-image>
 
     > This is a `minikube` command, meaning it doesn't work on "live" Kubernetes clusters, like the one you'll be using in the group assignment. More details on how to load images into a live cluster will be explained in that assignment.
 
@@ -53,16 +53,15 @@ Before you begin, read through the [Kubernetes shallow-dive](KUBERNETES.md) to u
 
 1. Finally, access the given URL in your browser and note the hostname in the header!
 
-At this point you're probably thinking you can do force-refresh and see the hostname change. However, Kubernetes works a bit differently! The load balancer in Kubernetes doesn't simply throw requests at the pods in random or round-robin order. Instead, it tracks IP addresses accessing the service and directs different *IP addresses* to different pods.
+At this point you're probably thinking you can do force-refresh and see the hostname change. However, things work a bit differently! Your browser will try to maintain a persistent connection to the load balancer in Kubernetes, and as long as that connection exists, Kubernetes will keep directing you to the same pod. (This *does* work in Traefik because the round-robin router works even with a persistent connection, as the backend connection to the services is not tied to the frontend connection) 
 
-Since you're only going to be connecting from one IP, what you can do to see the effect is to wait for about one minute, *then* do a force refresh - that's long enough for you to "fall off" the cache, and then you'll (hopefully) get assigned to a different pod when you load again!
-
-If you don't actually see a different hostname even after *waiting at least one minute between requests*, don't worry - it's likely you just got assigned to the same pod again. However, with luck, you'll be on a different pod and you'll see a different hostname!
+The workaround is to just use Incognito/Private Browsing/etc. mode. Open Incognito mode and access the localhost URL and notice the hostname. Then, close Incognito mode, open it again and access the URL again. You should see the hostname change each time!
 
 ## Submission
 
 Your submission should include:
 
 * Your YAML file.
+* Two screenshots showing *different* hostnames. Remember to use Incognito/Private mode!
 
 This assignment will be due Friday May 3rd at 11:59 PM.
