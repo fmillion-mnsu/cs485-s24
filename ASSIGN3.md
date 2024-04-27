@@ -16,6 +16,8 @@ In this exercise you and your group will deploy a container to a live Kubernetes
 
     > **Important Note:** You will already find a `config` file in the directory if you've installed Minikube. You likely want to keep this file around so you can continue to use Minikube in the future, so **rename** the file to sometihng like `config.minikube` rather than deleting it. Then place the downloaded `config` file into the directory.
 
+    If you cannot get WSL working or have other issues, you can also install `kubectl` as a Windows executable by following [these instructions](https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/). In this case, you also make a folder named `.kube` in your home directory and place the `config` file within - on Windows, your home directory is probably `C:\Users\<your_username>\`. You can then run many of these commands from Windows itself (except for the Docker commands).
+
 3. Test that your copy of `kubectl` can now access the live production cluster. Run `kubectl version` and check that `Server Version` is `v1.29.3+k3s1`. (In particular, the server version should end with `k3s1`, indicating this is a cluster installed by [K3s](https://docs.k3s.io/) rather than a local single-node Minikube cluster.)
 
 4. Clone the repository or otherwise download the three files in the `assign3` folder in this repository. (Note that while these are similar to the files in `i_assign3`, they are **not the same**.)
