@@ -1,0 +1,14 @@
+# This YAML enables access to the Traefik dashboard
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dashboard
+spec:
+  entryPoints:
+    - websecure
+  routes:
+  - match: Host(`traefik.kube.campus-quest.com`)
+    kind: Rule
+    services:
+    - name: api@internal
+      kind: TraefikService

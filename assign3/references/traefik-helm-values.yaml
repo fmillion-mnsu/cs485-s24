@@ -1,0 +1,40 @@
+# apply with:
+# helm upgrade traefik traefik/traefik -f traefik-helm-values.yaml
+env:
+  - name: DO_AUTH_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: digitalocean-dns
+        key: DO_AUTH_TOKEN
+  - name: POD_NAME
+    valueFrom:
+      fieldRef:
+        fieldPath: metadata.name
+  - name: POD_NAMESPACE
+    valueFrom:
+      fieldRef:
+        fieldPath: metadata.namespace
+
+certResolvers: 
+  letsencrypt:
+    email: flint.million.2@mnsu.edu
+    dnsChallenge:
+      provider: digitalocean
+      resolvers:
+        - 1.1.1.1
+        - 8.8.8.8
+    storage: /data/acme.json
+
+ports:
+  web:
+    redirectTo: 
+      port: websecure
+
+  websecure:
+    tls:
+      enabled: true
+      certResolver: letsencrypt
+      domains:
+        - main: "kube.campus-quest.com"
+          sans:
+            - "*.kube.campus-quest.com"

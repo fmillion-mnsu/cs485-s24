@@ -1,0 +1,13 @@
+# This Helm Chart update causes Traefik to search all namespaces for Ingress objects, and to expose the Traefik dashboard at traefik.kube.campus-quest.com.
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: traefik
+  namespace: kube-system
+spec:
+  chart: stable/traefik
+  set:
+    rbac.enabled: "true"
+    ssl.enabled: "true"
+    kubernetes.ingressClass: traefik
+    kubernetes.namespaces: ""
