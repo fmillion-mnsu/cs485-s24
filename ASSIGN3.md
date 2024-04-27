@@ -173,6 +173,8 @@ You *should* be able to do a force-refresh, as you did with the Docker Compose v
 
 This is basically the same as the individual assignment! However, note that **I'll also be checking the Kubernetes server itself!** So, do NOT delete anything you deploy from the server!
 
+This assignment is due **Friday, May 3rd** at **11:59 PM**. This is a group assignment - only *one* submission per group is required.
+
 # Deep Dive
 
 Let's explore the entire YAML structure and explain each line.
