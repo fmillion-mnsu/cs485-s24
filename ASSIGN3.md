@@ -6,7 +6,9 @@ In this exercise you and your group will deploy a container to a live Kubernetes
 
 1. Visit the D2L Content section and retrieve the file named `config` from the Group Assignment 3 folder. **This file contains the secret keys needed to access the cluster. Do not share it with anyone outside of the course!**
 
-1. (If you are on Windows) Copy the configuration file into your WSL environment. Remember that you can access WSL from File Explorer. Navigate to your Ubuntu instance, then to `home`, then to the folder for your username. Inside that folder, **create a new directory** called `.kube`. Open that directory and place the `config` file inside.
+    While there, also view `group_members.txt` and `credentials.txt` to learn your group number as well as your credentials for accessing the container registry that you will use in Step 7.
+
+2. (If you are on Windows) Copy the configuration file into your WSL environment. Remember that you can access WSL from File Explorer. Navigate to your Ubuntu instance, then to `home`, then to the folder for your username. Inside that folder, **create a new directory** called `.kube`. Open that directory and place the `config` file inside.
 
     This step reconfigures `kubectl` to interact with the live production cluster.
 
@@ -14,11 +16,11 @@ In this exercise you and your group will deploy a container to a live Kubernetes
 
     > **Important Note:** You will already find a `config` file in the directory if you've installed Minikube. You likely want to keep this file around so you can continue to use Minikube in the future, so **rename** the file to sometihng like `config.minikube` rather than deleting it. Then place the downloaded `config` file into the directory.
 
-1. Test that your copy of `kubectl` can now access the live production cluster. Run `kubectl version` and check that `Server Version` is `v1.29.3+k3s1`. (In particular, the server version should end with `k3s1`, indicating this is a cluster installed by [K3s](https://docs.k3s.io/) rather than a local single-node Minikube cluster.)
+3. Test that your copy of `kubectl` can now access the live production cluster. Run `kubectl version` and check that `Server Version` is `v1.29.3+k3s1`. (In particular, the server version should end with `k3s1`, indicating this is a cluster installed by [K3s](https://docs.k3s.io/) rather than a local single-node Minikube cluster.)
 
-2. Clone the repository or otherwise download the three files in the `assign3` folder in this repository. (Note that while these are similar to the files in `i_assign3`, they are **not the same**.)
+4. Clone the repository or otherwise download the three files in the `assign3` folder in this repository. (Note that while these are similar to the files in `i_assign3`, they are **not the same**.)
 
-3. **Add a file** to the `assign3` directory. The file must be named `group.txt`, all lowercase. (In Linux/UNIX, filenames are case sensitive!) In the file, include your group number and the names of your group members - one per line.
+5. **Add a file** to the `assign3` directory. The file must be named `group.txt`, all lowercase. (In Linux/UNIX, filenames are case sensitive!) In the file, include your group number and the names of your group members - one per line.
 
     Example `group.txt` file:
 
@@ -27,7 +29,7 @@ In this exercise you and your group will deploy a container to a live Kubernetes
         Hermione Granger
         Ron Weasley
 
-4. Build the container, just as you did in Individual Assignment 3. However, this time, **use the following tag for your container**:
+6. Build the container, just as you did in Individual Assignment 3. However, this time, **use the following tag for your container**:
 
     `cr.kube.campus-quest.com/group<num>/assign3`
 
@@ -39,7 +41,7 @@ In this exercise you and your group will deploy a container to a live Kubernetes
 
     In this case, the `cr.kube.campus-quest.com` refers to a **Docker container registry** that I have made available for you to use for the project. This syntax allows you to host Docker images on any Web server that has been configured properly.
 
-5. After you've built the image, you must add credentials to your copy of Docker so that you have permissions to use the registry. **You only need to do this once.**
+7. After you've built the image, you must add credentials to your copy of Docker so that you have permissions to use the registry. **You only need to do this once.**
 
     `docker login cr.kube.campus-quest.com`
 
@@ -47,7 +49,7 @@ In this exercise you and your group will deploy a container to a live Kubernetes
 
     Provide the credentials when prompted. If the login is successful, you may proceed.
 
-6. **Push** the image to the container registry:
+8. **Push** the image to the container registry:
 
     `docker push cr.kube.campus-quest.com/group<num>/assign3`
 
@@ -57,7 +59,7 @@ In this exercise you and your group will deploy a container to a live Kubernetes
     >
     > To mitigate this, Kubernetes always loads images from a container registry. The good news for us is that it's very easy to setup a container registry using Let's Encrypt certificates and Traefik (yes, again!) as the proxy server for the registry. When you run your own container registry, you are limited only by the amount of storage you have available on the server to store container images in. 
 
-1. Now it's time to deploy your image into Kubernetes! There are a few new steps to this.
+9. Now it's time to deploy your image into Kubernetes! There are a few new steps to this.
 
     First, we will create a **namespace** to put all your work into. Kubernetes **namespaces** are simply separate spaces in which to deploy Kubernetes objects. You can configure many things based on namespaces, but for our purposes it will simply serve as a way to ensure that your containers run independently of others in the class. 
 
@@ -73,7 +75,7 @@ In this exercise you and your group will deploy a container to a live Kubernetes
 
         kubectl create namespace gX
 
-2. Now, we need to create a **secret** in our namespace. This secret contains the login information needed for Kubernetes to retrieve the container image from our registry. 
+10. Now, we need to create a **secret** in our namespace. This secret contains the login information needed for Kubernetes to retrieve the container image from our registry. 
 
     To create a **secret** in your group's **namespace**, use this command, replacing the items in angle brackets (`<` and `>`) as appropriate:
 
@@ -81,7 +83,7 @@ In this exercise you and your group will deploy a container to a live Kubernetes
 
     The username and password should be the same as the ones you used on the `docker login` command, and the namespace is `g1`, `g2`, etc. as appropriate.
 
-3. Great - you're now ready to deploy your image into the Kubernetes cluster! Start by creating a YAML file to store the configuration for your objects.
+11. Great - you're now ready to deploy your image into the Kubernetes cluster! Start by creating a YAML file to store the configuration for your objects.
 
     Here is a Kubernetes **deployment** YAML file you can use to get started:
 
@@ -108,7 +110,7 @@ In this exercise you and your group will deploy a container to a live Kubernetes
 
     Make sure you change `groupX` to match your group number! (replace `X` with your group num)
 
-4. For Traefik to see the deployment, we need a Service, just as we did before. However, in this case we don't have to give the Service a *type*, since Traefik in Kubernetes detects containers via Kubernetes *service* definitions. 
+12. For Traefik to see the deployment, we need a Service, just as we did before. However, in this case we don't have to give the Service a *type*, since Traefik in Kubernetes detects containers via Kubernetes *service* definitions. 
   
     Here is the code for the service. Add it to your YAML file. Remember that you must separate individual objects in the YAML file by using three hyphens (`---`) on a line by themselves.
 
@@ -124,7 +126,7 @@ In this exercise you and your group will deploy a container to a live Kubernetes
               port: 80
               targetPort: 80  
 
-5. Finally, we need a new type of object vknown as an `Ingress`. An *Ingress* object simply defines an entry point into the cluster. Traefik will see the service, match it with an Ingress, and automatically configure itself much like it did with Docker Compose.
+13. Finally, we need a new type of object vknown as an `Ingress`. An *Ingress* object simply defines an entry point into the cluster. Traefik will see the service, match it with an Ingress, and automatically configure itself much like it did with Docker Compose.
 
     Add a third object section to your YAML file, remembering to separate the objects using three hyphens alone on a line between the two sections.
 
@@ -150,15 +152,15 @@ In this exercise you and your group will deploy a container to a live Kubernetes
                     port:
                       number: 80
 
-6. Save your YAML file with a reasonable file name.
+14. Save your YAML file with a reasonable file name.
   
-7. Now is the moment - it's time to deploy your configuration into the cluster! 
+15. Now is the moment - it's time to deploy your configuration into the cluster! 
 
         kubectl apply -n gX -f <yourYamlFile>
 
     Remember to replace `gX` with `g` followed by your group number, and use the correct YAML file.
 
-8. Finally, try to access your new site at `https://group<num>.kube.campus-quest.com`.
+16. Finally, try to access your new site at `https://group<num>.kube.campus-quest.com`.
 
 If you are successful, then congratulations - you've just deployed a live public web page to a real-life Kubernetes cluster! ... *And you are DONE with the course!*
 
